@@ -85,3 +85,32 @@ if not st.session_state["uploaded"]:
         st.session_state["filename"] = filename
 
         st.rerun()
+
+if st.session_state["uploaded"]:
+    st.write(
+        f"Here is a financial summary of the account holder for the uploaded statement:"
+    )
+    st.button("Upload New PDF", on_click=reset)
+    initial_prompt = """
+    I want to analyze the financial health of the individual based solely on the given statement. Here are some details I want information on:
+
+    1. Total monthly deposits (with months and amounts)
+    2. Total monthly withdrawals (with months and amounts)
+    3. Any recurring payments (such as rent, utilities, loan repayments - with descriptions, dates, and amounts)
+    4. Any other noticeable spending habits (with amounts)
+    
+    Make sure your output is well formatted and is plain-text. 
+    I want to determine if this individual should be awarded a business loan based on the above.
+    Give me a potential yes, potential no or cannot say answer and evidence your response from details from above. Be sure to highlight any noticeable red-flags or positive signs. 
+    """
+    query_engine = st.session_state["query_engine"]
+    if not st.session_state["initial_response"]:
+        with st.spinner("Generating initial analysis..."):
+            response = query_engine.query(initial_prompt)
+            st.session_state["initial_response"] = response.response
+    st.write(st.session_state["initial_response"])
+    prompt = st.text_input("Type any additional queries query")
+    if prompt:
+        with st.spinner("Generating response..."):
+            response = query_engine.query(prompt)
+            st.write(response.response)
