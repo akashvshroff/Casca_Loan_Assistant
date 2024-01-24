@@ -1,0 +1,7 @@
+streamlit
+langchain
+llama-index
+transformers
+openai
+sentence-transformers
+streamlit_lottie
