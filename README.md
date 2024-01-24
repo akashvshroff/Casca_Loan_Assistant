@@ -7,6 +7,8 @@
 
   https://github.com/akashvshroff/Casca_Loan_Assistant/assets/63399889/4a0460ba-9519-4373-b1f8-f8ab7f466b54
 
+- This solution is meant to represent the MVP of the LLM RAG approach - however, there are some clear avenues for improvement. The lowest hanging fruit is to improve the prompting to the LLM itself. Next, we could look at increasing RAG efficiency by using some cache solution or trying to extract relevant parts of the document. To improve reasoning, we could fine-tune a base-model on a Chain-of-Thought financial data regarding loans. Finally, a more cosmetic improvement could seek to use a multi-modal LLM through which we return an annotated version of the bank statement wherein we mark out transactions that are concerning and attach some summary analysis.
+
 ## Installation & Running
 - You can use the requirements.txt file to pip install all packages that are needed to run the file and then run `streamlit run main.py` to get the frontend up and running. 
 - It will take a non-trivial amount of time during the first boot up to install the necessary embeddings libraries as well as the model dependencies, but every subsequent running should be quite responsive.
